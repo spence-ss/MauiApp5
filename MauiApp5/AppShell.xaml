@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="MauiApp5.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:MauiApp5"
+       Title="Restore Border Clip Issue"
+       Shell.FlyoutBehavior="Locked">
+
+    <ShellContent Title="Content Fits"
+                  Route="FitPage">
+        <ContentPage>
+            <FlexLayout>
+                <Border FlexLayout.Grow="1"
+                        Margin="25"
+                        StrokeThickness="10"
+                        Stroke="{StaticResource Primary}"
+                        BackgroundColor="{StaticResource LightGray}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="25" />
+                    </Border.StrokeShape>
+
+                    <FlexLayout AlignItems="Center"
+                                Direction="Column">
+                        <Image Source="dotnet_bot.png"
+                               SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                               HeightRequest="200"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Hello, World!"
+                               FontSize="32"
+                               BackgroundColor="{StaticResource Primary}"
+                               TextColor="White"
+                               Margin="20,10,20,5" />
+                        <Label Text="Fits and Resizes Correctly"
+                               FontAttributes="Bold" 
+                               Margin="20,0,20,0"/>
+                        <Label Text="Well, until something hits the edge"
+                               FontAttributes="Italic"
+                               FontSize="12"
+                               Margin="20,0,20,10"/>
+                        <Label Text="AlignSelf = Center and label has a width constraint where it doesn't get clipped by the border view when maximizing/restoring"
+                               Margin="20,0,20,0"
+                               MaximumWidthRequest="200" />
+                    </FlexLayout>
+                </Border>
+                <BoxView FlexLayout.Basis="20%"
+                         FlexLayout.Order="-1" />
+                <BoxView FlexLayout.Basis="20%" />
+            </FlexLayout>
+        </ContentPage>
+    </ShellContent>
+    <ShellContent Title="Stretch Fail"
+                  Route="StretchPage">
+        <ContentPage>
+            <FlexLayout>
+                <Border FlexLayout.Grow="1"
+                        Margin="25"
+                        StrokeThickness="10"
+                        Stroke="{StaticResource Primary}"
+                        BackgroundColor="{StaticResource LightGray}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="25" />
+                    </Border.StrokeShape>
+
+                    <FlexLayout AlignContent="Center"
+                                AlignItems="Center"
+                                Direction="Column">
+                        <Image Source="dotnet_bot.png"
+                               SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                               HeightRequest="200"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Hello, World!"
+                               FontSize="32"
+                               FlexLayout.AlignSelf="Stretch"
+                               BackgroundColor="{StaticResource Primary}"
+                               TextColor="White"
+                               Margin="20,10,20,5" />
+                        <Label Text="Does Not Resize Correctly"
+                               FontAttributes="Bold"/>
+                        <Label Text="AlignSelf = Stretch causes clipping immediately on restoring window and triggers incorrect rendering."
+                               MaximumWidthRequest="200" />
+                    </FlexLayout>
+                </Border>
+                <BoxView FlexLayout.Basis="20%"
+                         FlexLayout.Order="-1" />
+                <BoxView FlexLayout.Basis="20%" />
+            </FlexLayout>
+        </ContentPage>
+    </ShellContent>
+    <ShellContent Title="Clip Fail"
+                  Route="OverflowPage">
+        <ContentPage>
+            <FlexLayout>
+                <Border FlexLayout.Grow="1"
+                        Margin="25"
+                        StrokeThickness="10"
+                        Stroke="{StaticResource Primary}"
+                        BackgroundColor="{StaticResource LightGray}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="25" />
+                    </Border.StrokeShape>
+
+                    <FlexLayout AlignContent="Center"
+                                AlignItems="Center"
+                                JustifyContent="Start"
+                                Direction="Column">
+                        <Image Source="dotnet_bot.png"
+                               SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                               HeightRequest="200"
+                               HorizontalOptions="Center"
+                               FlexLayout.Grow="0" />
+                        <Label Text="Hello, World!"
+                               FontSize="32"
+                               HorizontalOptions="Center"
+                               BackgroundColor="{StaticResource Primary}"
+                               TextColor="White"
+                               Margin="20,10,20,5" />
+                        <Label Text="Does Not Resize Correctly"
+                               FontAttributes="Bold"
+                               Margin="20,0,20,10" />
+                        <Label Text="Extended text inside the label increases its desired width and triggers clipping on the border view during maximizing/restoring" 
+                               FlexLayout.AlignSelf="Stretch"
+                               Margin="20,0,20,0"/>
+                    </FlexLayout>
+                </Border>
+                <BoxView FlexLayout.Basis="20%"
+                         FlexLayout.Order="-1" />
+                <BoxView FlexLayout.Basis="20%" />
+            </FlexLayout>
+        </ContentPage>
+    </ShellContent>
+</Shell>
